@@ -1,0 +1,39 @@
+# Node dependencies
+node_modules
+npm-debug.log
+yarn.lock
+
+# Laravel dependencies
+vendor
+composer.lock
+
+# Environment
+.env
+.env.* 
+
+# Logs & temp files
+*.log
+storage/*.key
+storage/logs
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+storage/debugbar
+
+# Build output
+/public/hot
+/public/storage
+/public/build
+
+# OS / IDE / editor stuff
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Docker and Git
+.dockerignore
+.git
+.gitignore

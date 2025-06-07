@@ -1,0 +1,37 @@
+# PHPUnit cache & results
+/.phpunit.cache
+/.phpunit.result.cache
+
+# Laravel specific
+/bootstrap/ssr
+/storage/*.key
+/storage/pail
+/public/storage
+/vendor
+
+# Frontend / Node
+/node_modules
+/public/build
+/public/hot
+
+# Environment files
+.env
+.env.backup
+.env.production
+/auth.json
+
+# Logs and lock files
+npm-debug.log
+yarn-error.log
+
+# Homestead (if used)
+/Homestead.json
+/Homestead.yaml
+
+# IDE/editor files
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
