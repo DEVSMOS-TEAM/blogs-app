@@ -1,13 +1,15 @@
 import {AppLogo} from "@/components/AppLogo";
 import { Button } from '@headlessui/react';
-import { NavItemType } from '@/lib/const-types';
+import { NavItemType } from '@/types/const-types';
 import { MoveUpRight } from 'lucide-react';
+import React from 'react';
 
 export const RootLayout = ({children} : {children: React.ReactNode}) => {
    return <>
+
        <NavBar />
-       <main className="bg-[#262626] py-10">
-           <section className="w-2/3 mx-auto">
+       <main className="bg-background py-10">
+           <section>
                {children}
            </section>
        </main>
@@ -186,8 +188,8 @@ const navLists : NavItemType[] = [
 ]
 
 const NavBar = () => {
-    return <header className="bg-[#1A1A1A] flex items-center py-4">
-        <nav className="w-2/3 mx-auto flex items-center justify-between">
+    return <header className="bg-[#1A1A1A] flex items-center py-5">
+        <nav className="w-4/5 mx-auto flex items-center justify-between">
             <AppLogo />
             <ul className="flex items-center gap-4">
                 {navLists.map((navItem, index) => {
@@ -200,7 +202,7 @@ const NavBar = () => {
 }
 
 const Footer = () => {
-    return <footer className="w-2/3 mx-auto flex items-start justify-between py-6">
+    return <footer className="w-4/5 mx-auto flex items-start justify-between py-6">
         {
             navLists.map((navItem, index) => {
                 return <BottomNavItem key={index} item={navItem} />

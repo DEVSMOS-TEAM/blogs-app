@@ -9,5 +9,6 @@ Route::get('/', function () {
 
 
 Route::get('/test', function (){
-    return Inertia::render('test');
+    return Inertia::render('resource');
 });
+
