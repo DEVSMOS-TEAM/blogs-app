@@ -45,8 +45,8 @@ const Hero = () => {
            <p data-aos="fade-up" data-aos-delay="100" className="text-7xl">Knowledge</p>
            <p data-aos="fade-up" data-aos-delay="200" className="text-base text-justify text-[#98989A]">Dive deep into the AI universe with our collection of insightful podcasts. Explore the latest trends, breakthroughs, and discussions on artificial intelligence. Whether you're an enthusiast or a professional, our AI podcasts offer a gateway to knowledge and innovation.</p>
        </div>
-      <div className="mt-20">
-          <Separator className="bg-[#262626] absolute left-0"/>
+      <div className="mt-20" data-aos="fade-up" data-aos-delay="300">
+          <Separator className="bg-[#262626] absolute left-0" />
           <div className="flex">
               {
                   heroItems.map((item,index) => {
@@ -61,7 +61,7 @@ const Hero = () => {
 
 // HeroChildBox
 const HeroChildBox = ({className,title, description} : {className?: string,title: string, description: string}) => {
-    return <div className={`space-y-4 border-[#262626] w-full flex flex-col items-center py-8 ${className}`}>
+    return <div data-aos="fade-up" className={`space-y-4 border-[#262626] w-full flex flex-col items-center py-8 ${className}`}>
         <div className="flex items-center text-5xl">
             <p>{title}</p>
             <Plus className="text-[#FFD11A] h-10 w-10"/>
@@ -122,7 +122,7 @@ const DiveIntoTheDetailsData : DiveIntoTheDetailsType[] = [
 ]
 
 const DiveIntoTheDetails = () => {
-    return <section id="dive-into-the-details">
+    return <section id="dive-into-the-details" data-aos="fade-up">
         <header className="bg-[#1A1A1A] py-10 flex items-center">
            <div className="w-4/5 mx-auto flex justify-between items-center">
                <div className=" space-y-5 ">
@@ -165,7 +165,7 @@ const DiveIntoTheDetails = () => {
 const SubFirstSectionItem = ({title, description, description2, icon, image, author, publicationDate, category} : DiveIntoTheDetailsType) => {
 
     return (
-        <div className=" grid grid-cols-5 justify-between items-center">
+        <div className=" grid grid-cols-5 justify-between items-center" data-aos="fade-up">
             <div className="space-y-5 col-span-2">
                 <img src={icon as unknown as string} alt="icon" className="h-10 w-10" />
                 <p className="text-3xl font-bold w-2/3">{title}</p>
@@ -209,7 +209,7 @@ const SubFirstSectionItem = ({title, description, description2, icon, image, aut
 
 
 const SubSecondSectionItem = ({image, title, description, index}: {index :number,image? : LocalIcons, title : string, description : string}) => {
-    return  <div className={`border-[#262626] space-y-5 py-10 p-0 ${index != DiveIntoTheDetailsData.length - 1 ? 'border-r-2 px-10' : 'pl-10'}`}>
+    return  <div data-aos="fade-up" className={`border-[#262626] space-y-5 py-10 p-0 ${index != DiveIntoTheDetailsData.length - 1 ? 'border-r-2 px-10' : 'pl-10'}`}>
         <img src={image as unknown as string} alt="image" className="rounded-md object-cover" />
         <p className="text-2xl font-bold">{title}</p>
         <p className="text-base text-[#98989A]">{description}</p>
