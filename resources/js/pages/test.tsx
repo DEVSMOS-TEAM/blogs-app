@@ -1,7 +1,9 @@
 import { RootLayout } from '@/layouts/RootLayout';
 const Test = () => {
   return <RootLayout>
-      <p>Hello</p>
+   <div data-aos="fade-up">
+       <p >Hello</p>
+   </div>
   </RootLayout>
 }
 
