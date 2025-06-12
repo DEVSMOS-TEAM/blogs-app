@@ -39,11 +39,11 @@ const heroItems : HeroItem[] = [
 ]
 
 const Hero = () => {
-   return <section id="hero" className="w-4/5 mx-auto flex flex-col justify-center h-screen ">
-       <p className="text-7xl">Unlock a World of</p>
+   return <section id="hero" className="w-4/5 mx-auto flex flex-col justify-center h-screen">
+       <p data-aos="fade-up" className="text-7xl">Unlock a World of</p>
        <div className="flex items-center gap-10 my-6">
-           <p className="text-7xl">Knowledge</p>
-           <p className="text-base text-justify text-[#98989A]">Dive deep into the AI universe with our collection of insightful podcasts. Explore the latest trends, breakthroughs, and discussions on artificial intelligence. Whether you're an enthusiast or a professional, our AI podcasts offer a gateway to knowledge and innovation.</p>
+           <p data-aos="fade-up" data-aos-delay="100" className="text-7xl">Knowledge</p>
+           <p data-aos="fade-up" data-aos-delay="200" className="text-base text-justify text-[#98989A]">Dive deep into the AI universe with our collection of insightful podcasts. Explore the latest trends, breakthroughs, and discussions on artificial intelligence. Whether you're an enthusiast or a professional, our AI podcasts offer a gateway to knowledge and innovation.</p>
        </div>
       <div className="mt-20">
           <Separator className="bg-[#262626] absolute left-0"/>
