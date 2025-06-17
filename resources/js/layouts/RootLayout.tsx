@@ -8,7 +8,7 @@ export const RootLayout = ({children} : {children: React.ReactNode}) => {
    return <>
 
        <NavBar />
-       <main className="bg-background py-10">
+       <main className="bg-background">
            <section>
                {children}
            </section>
@@ -188,7 +188,7 @@ const navLists : NavItemType[] = [
 ]
 
 const NavBar = () => {
-    return <header className="bg-[#1A1A1A] flex items-center py-5">
+    return <header className="bg-[#1A1A1A] flex items-center py-5 sticky top-0 z-100">
         <nav className="w-4/5 mx-auto flex items-center justify-between">
             <AppLogo />
             <ul className="flex items-center gap-4">
