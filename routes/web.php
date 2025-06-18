@@ -10,5 +10,8 @@ Route::get('/', function () {
 
 Route::get('/test', function (){
     return Inertia::render('test');
-});
+})->middleware('auth:api');
+
+require __DIR__.'/auth.php';
+
 

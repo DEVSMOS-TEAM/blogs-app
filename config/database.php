@@ -120,8 +120,8 @@ return [
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'options'  => [
-                'authSource' => 'admin'
-    ]
+                'database' => env('DB_AUTH_DATABASE', 'admin'),
+            ],
 ],
 
 
