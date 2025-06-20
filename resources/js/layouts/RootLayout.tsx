@@ -8,7 +8,7 @@ export const RootLayout = ({children} : {children: React.ReactNode}) => {
    return <>
 
        <NavBar />
-       <main className="bg-background py-10">
+       <main className="bg-background">
            <section>
                {children}
            </section>
@@ -58,7 +58,7 @@ const navLists : NavItemType[] = [
     },
     {
         label: "News",
-        path: "/",
+        path: "/news",
         sub_items: [
             {
                 label: "Trending Stories",
@@ -188,7 +188,7 @@ const navLists : NavItemType[] = [
 ]
 
 const NavBar = () => {
-    return <header className="bg-[#1A1A1A] flex items-center py-5">
+    return <header className="bg-[#1A1A1A] flex items-center py-5 sticky top-0 z-100">
         <nav className="w-4/5 mx-auto flex items-center justify-between">
             <AppLogo />
             <ul className="flex items-center gap-4">
@@ -215,7 +215,7 @@ const BottomNavItem = ({item} : {item: NavItemType}) => {
     return <div className="space-y-2">
         <p className="text-base font-bold">{item.label}</p>
         <ul className="text-sm space-y-1 text-[#666666]">
-            {item.sub_items?.map((subItem, index) => {
+            {item.sub_items?.map((subItem , index) => {
                 return <li key={index}>
                     <div className="space-x-1 flex items-center">
                         <a href={subItem.path}>{subItem.label}</a>

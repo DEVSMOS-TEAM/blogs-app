@@ -10,8 +10,10 @@ Route::get('/', function () {
 
 Route::get('/test', function (){
     return Inertia::render('test');
-})->middleware('auth:api');
+});
+
+Route::get('/news' , function() {
+    return Inertia::render('news');
+});
 
 require __DIR__.'/auth.php';
-
-

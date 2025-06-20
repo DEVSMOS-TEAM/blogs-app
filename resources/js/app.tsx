@@ -19,11 +19,10 @@ createInertiaApp({
         if (!page) {
             throw new Error(`Page not found: ${name}`);
         }
-
         return page();
     },
     setup({ el, App, props }) {
-        const root = createRoot(el);
+        const root = createRoot(el);    
 
         const BlogApp = () => {
             useEffect(() => {
