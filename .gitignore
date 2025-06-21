@@ -15,7 +15,8 @@
 /public/hot
 
 # Environment files
- .env
+.env
+.env.*
 .env.backup
 .env.production
 /auth.json
