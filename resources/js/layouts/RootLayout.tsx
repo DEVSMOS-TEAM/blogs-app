@@ -276,7 +276,7 @@ const BottomNavItem = ({item} : {item: NavItemType}) => {
     return <div className="space-y-2">
         <p className="text-base font-bold">{item.label}</p>
         <ul className="text-sm space-y-1 text-[#666666]">
-            {item.sub_items?.map((subItem, index) => {
+            {item.sub_items?.map((subItem , index) => {
                 return <li key={index}>
                     <div className="space-x-1 flex items-center">
                         <a href={subItem.path}>{subItem.label}</a>
