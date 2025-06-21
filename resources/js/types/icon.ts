@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Icon from '../../../public/resource_main_first_icon.svg';
+import Icon from '../../../public/image_resource_01.png';
 import Icon2 from '../../../public/resource_main_second_icon.svg';
 import image_resource_01 from '../../../public/image_resource_01.png';
 import image_resource_02 from '../../../public/image_resource_02.png';

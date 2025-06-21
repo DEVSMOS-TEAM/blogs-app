@@ -1,12 +1,14 @@
 import {AppLogo} from "@/components/AppLogo";
 import { Button } from '@headlessui/react';
 import { NavItemType } from '@/types/const-types';
-import { MoveUpRight } from 'lucide-react';
-import React from 'react';
+import { Menu, MoveUpRight, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Head } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 
-export const RootLayout = ({children} : {children: React.ReactNode}) => {
+export const RootLayout = ({children, title} : {children: React.ReactNode, title?: string}) => {
    return <>
-
+       <Head title={title} />
        <NavBar />
        <main className="bg-background">
            <section>
@@ -94,7 +96,7 @@ const navLists : NavItemType[] = [
     },
     {
         label: "Blogs",
-        path: "/",
+        path: "/blogs",
         sub_items: [
             {
                 label: "Quantum Computing",
@@ -157,7 +159,7 @@ const navLists : NavItemType[] = [
     },
     {
         label: "Resources",
-        path: "/",
+        path: "/resources",
         sub_items: [
             {
                 label: "Whitepapers",
@@ -188,28 +190,87 @@ const navLists : NavItemType[] = [
 ]
 
 const NavBar = () => {
-    return <header className="bg-[#1A1A1A] flex items-center py-5 sticky top-0 z-100">
-        <nav className="w-4/5 mx-auto flex items-center justify-between">
-            <AppLogo />
-            <ul className="flex items-center gap-4">
-                {navLists.map((navItem, index) => {
-                    return <li key={index}><a href={navItem.path}>{navItem.label}</a></li>
-                })}
-            </ul>
-            <Button className="bg-primary text-black text-sm p-2 rounded-md">Contact Us</Button>
-        </nav>
-    </header>
-}
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    function navigateToLogin(){
+        Inertia.visit("/auth/login");
+    }
+
+    function navigateToAbout(){
+        Inertia.visit("/about-us");
+    }
+    return (
+        <header className="bg-[#1A1A1A] py-5">
+            <nav className="container mx-auto px-4 flex items-center justify-between">
+                <AppLogo />
+
+                <ul className="hidden md:flex items-center gap-6 text-white">
+                    {navLists.map((navItem) => (
+                        <li key={navItem.path}>
+                            <a href={navItem.path} className="hover:text-primary">
+                                {navItem.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="flex gap-5">
+                    <Button onClick={navigateToLogin} className="hidden md:block text-sm py-2 px-4 hover:text-primary hover:font-bold rounded-md transition-all duration-300 ease-linear cursor-pointer">
+                        LOGIN
+                    </Button>
+                    <Button onClick={navigateToAbout} className="hidden md:block bg-primary text-black text-sm p-2 rounded-md">
+                        About Us
+                    </Button>
+                </div>
+
+                <button
+                    className="md:hidden text-white"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle Menu"
+                >
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+            </nav>
+
+            {isMenuOpen && (
+                <ul className="md:hidden mt-4 px-6 space-y-3 text-white">
+                    {navLists.map((navItem) => (
+                        <li key={navItem.path}>
+                            <a
+                                href={navItem.path}
+                                className="block py-2 border-b border-gray-700"
+                            >
+                                {navItem.label}
+                            </a>
+                        </li>
+                    ))}
+                    <li>
+                        <Button className="w-full bg-primary text-black text-sm p-2 rounded-md">
+                            Contact Us
+                        </Button>
+                    </li>
+                </ul>
+            )}
+        </header>
+    );
+};
+
 
 const Footer = () => {
-    return <footer className="w-4/5 mx-auto flex items-start justify-between py-6">
-        {
-            navLists.map((navItem, index) => {
-                return <BottomNavItem key={index} item={navItem} />
-            })
-        }
-    </footer>
-}
+    return (
+     <section className="py-10 container mx-auto px-4">
+         <footer className="w-full py-10 grid grid-cols-2 content-center lg:flex lg:justify-between gap-8">
+             {navLists.map((navItem, index) => (
+                 <BottomNavItem key={index} item={navItem} />
+             ))}
+         </footer>
+         <div className="mt-10 text-center text-xs text-gray-500">
+             © {new Date().getFullYear()} Your Company Name. All rights reserved.
+         </div>
+     </section>
+    );
+};
+
 
 const BottomNavItem = ({item} : {item: NavItemType}) => {
     return <div className="space-y-2">
