@@ -32,8 +32,8 @@ class UserModel extends Authenticatable implements JWTSubject
                     'access_token' => $data->token,
                 ],
                 'provider_image_url' => $data->getAvatar(),
-                'password_hash' => Hash::make($data->getEmail()),
-                'bio' => $data->getName(),
+                'password_hash' => Hash::make(str()->random(16)),
+                'bio' => "no bio",
             ]);
     }
 

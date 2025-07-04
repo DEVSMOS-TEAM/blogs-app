@@ -2,9 +2,21 @@ import {AppLogo} from "@/components/AppLogo";
 import { Button } from '@headlessui/react';
 import { NavItemType } from '@/types/const-types';
 import { Menu, MoveUpRight, X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
+import { usePage} from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import type {PageProps} from '@/lib/types.d.';
+import { toast, Toaster } from 'sonner';
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Separator } from '@/components/ui/separator';
+import { IoPersonSharp } from "react-icons/io5";
+import { MdOutlineSettings } from "react-icons/md";
 
 export const RootLayout = ({children, title} : {children: React.ReactNode, title?: string}) => {
    return <>
@@ -26,34 +38,34 @@ const navLists : NavItemType[] = [
         sub_items: [
             {
                 label: "Features",
-                path: "/",
+                path: "#",
                 sub_items: [],
                 isJustAdded: true,
                 icon: MoveUpRight
             },
             {
                 label: "Blogs",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Resources",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Testimonials",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Contact Us",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Newsletter",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
         ]
@@ -64,32 +76,32 @@ const navLists : NavItemType[] = [
         sub_items: [
             {
                 label: "Trending Stories",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Featured Videos",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Technology",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Health",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Politics",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Environment",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
         ]
@@ -100,39 +112,39 @@ const navLists : NavItemType[] = [
         sub_items: [
             {
                 label: "Quantum Computing",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "AI Ethics",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Space Exploration",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Biotechnology",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Renewable Energy",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
             {
                 label: "Biohacking",
-                path: "/",
+                path: "#",
                 sub_items: [],
             },
         ]
     },
     {
         label: "Podcasts",
-        path: "/",
+        path: "#",
         sub_items: [
             {
                 label: "AI Revolution",
@@ -191,7 +203,21 @@ const navLists : NavItemType[] = [
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { auth, flash }  = usePage<PageProps>().props;
 
+    useEffect(() => {
+        if (flash?.message) {
+            toast.success(flash.message);
+        }
+    }, [flash?.message]);
+
+    function navigateToProfile(){
+        Inertia.visit(`/profile/@${auth.user?.username.replace(/\s+/g, '')}`);
+    }
+
+    function handleLogout(){
+        Inertia.get(`/auth/${auth.user?.oauth2.provider}/logout`);
+    }
     function navigateToLogin(){
         Inertia.visit("/auth/login");
     }
@@ -201,6 +227,7 @@ const NavBar = () => {
     }
     return (
         <header className="bg-[#1A1A1A] py-5">
+            <Toaster richColors position="top-center"/>
             <nav className="container mx-auto px-4 flex items-center justify-between">
                 <AppLogo />
 
@@ -215,9 +242,52 @@ const NavBar = () => {
                 </ul>
 
                 <div className="flex gap-5">
-                    <Button onClick={navigateToLogin} className="hidden md:block text-sm py-2 px-4 hover:text-primary hover:font-bold rounded-md transition-all duration-300 ease-linear cursor-pointer">
-                        LOGIN
-                    </Button>
+                    {
+                        auth.user ? (
+                                <HoverCard>
+                                    <HoverCardTrigger>
+                                        <Avatar>
+                                            <AvatarImage src={auth.user.provider_image_url} alt={auth.user.username} />
+                                            <AvatarFallback>{auth.user.username.toString().substring(0, 2)}</AvatarFallback>
+                                        </Avatar>
+                                    </HoverCardTrigger>
+                                    <HoverCardContent className="bg-muted p-1">
+                                       <div className="space-y-3">
+                                           <div className="p-2">
+                                               <p className="text-md text-white">{auth.user.username}</p>
+                                               <p className="text-xs text-gray-400">{auth.user.email}</p>
+                                           </div>
+                                           <Separator className="bg-muted-foreground opacity-45"/>
+                                           <div className="space-y-2">
+                                               <Button className="w-full text-white p-2 rounded-xs bg-transparent hover:bg-neutral-500"
+                                               onClick={navigateToProfile}>
+                                                   <div className="flex gap-2 items-center text-sm">
+                                                       <IoPersonSharp/>
+                                                       <p>Profile</p>
+                                                   </div>
+                                               </Button>
+                                               <Button className="w-full text-white p-2 rounded-xs bg-transparent hover:bg-neutral-500">
+                                                   <div className="flex gap-2 items-center text-sm">
+                                                       <MdOutlineSettings/>
+                                                       <p>Setting</p>
+                                                   </div>
+                                               </Button>
+                                           </div>
+                                           <Separator className="bg-muted-foreground opacity-45"/>
+                                           <Button className="bg-primary text-black text-sm p-2 px-4 rounded-sm mb-2"
+                                           onClick={handleLogout}>
+                                               Logout
+                                           </Button>
+                                       </div>
+                                    </HoverCardContent>
+                                </HoverCard>
+
+                            ) : (
+                            <Button onClick={navigateToLogin} className="hidden md:block text-sm py-2 px-4 hover:text-primary hover:font-bold rounded-md transition-all duration-300 ease-linear cursor-pointer">
+                                LOGIN
+                            </Button>
+                        )
+                    }
                     <Button onClick={navigateToAbout} className="hidden md:block bg-primary text-black text-sm p-2 rounded-md">
                         About Us
                     </Button>
