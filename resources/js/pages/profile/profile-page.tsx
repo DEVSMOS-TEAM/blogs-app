@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/react';
 
 export default function ProfilePage() {
     const [value, setValue] = useState(0)
-    const { auth, username } = usePage<PageProps>().props;
+    const { auth } = usePage<PageProps>().props;
     return (
         <RootLayout>
             <div className="min-h-screen bg-transparent text-white">
@@ -19,7 +19,7 @@ export default function ProfilePage() {
                         </Avatar>
                         <div>
                             <h1 className="text-xl font-bold text-white">{auth.user?.username}</h1>
-                            <p className="text-gray-400">{username}</p>
+                            <p className="text-gray-400">@{auth.user?.username.replace(/\s+/g, '')}</p>
                         </div>
                     </div>
 

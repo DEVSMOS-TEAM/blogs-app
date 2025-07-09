@@ -216,7 +216,7 @@ const NavBar = () => {
     }
 
     function handleLogout(){
-        Inertia.get(`/auth/${auth.user?.oauth2.provider}/logout`);
+        Inertia.get(`/auth/logout`);
     }
     function navigateToLogin(){
         Inertia.visit("/auth/login");

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/csrf', function () {
+    return csrf_token();
+});
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('welcome');

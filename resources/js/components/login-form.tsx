@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Inertia } from '@inertiajs/inertia';
+import { Link } from '@inertiajs/react';
 
 export function LoginForm({
   className,
@@ -84,9 +85,9 @@ export function LoginForm({
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
+                <Link href="/auth/register" className="text-primary hover:underline">
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </form>

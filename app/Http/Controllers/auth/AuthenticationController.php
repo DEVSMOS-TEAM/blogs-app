@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 # issue on date: 23 June 2025
@@ -22,24 +24,38 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenticationController extends Controller
 {
-    public function register(Request $request)
+    public function create(){
+        return Inertia::render('auth/sign-up');
+    }
+    public function store(Request $request)
     {
         try{
             $credentials = $request->validate([
+                'first_name' => 'required|string|min:3|max:90',
+                'last_name' => 'required|string|min:3|max:90',
                 'username' => "required|string|min:3|max:255|unique:users,username",
                 'email' => "required|email|unique:users,email",
                 'password' => "required|string|min:8|confirmed",
-                'bio' => 'string|max:255',
-                'provider_image_url' => 'string|max:255'
+                'bio' => 'string|max:255|nullable',
+                'provider_image_url' => 'nullable|file|mimes:jpeg,png,webp|max:2048'
             ]);
 
+            if($credentials['provider_image_url']){
+                $file = $credentials['provider_image_url'];
+                $filename = "Kumnit-@" . $credentials['username'] . "." . $file->getClientOriginalExtension();
+                $path = $file->storeAs('profile', $filename, 'public');
+                $credentials['provider_image_url'] = $path;
+            }
+
             $user = UserModel::create([
+                'first_name' => $credentials['first_name'],
+                'last_name' => $credentials['last_name'],
                 'username' => $credentials['username'],
                 'email' => $credentials['email'],
                 'oauth2' => [],
                 'password_hash' => Hash::make($credentials['password']),
-                "bio" => $credentials['bio'],
-                "provider_image_url" => $credentials['provider_image_url']
+                "bio" => $credentials['bio'] ?? "",
+                "provider_image_url" => $credentials['provider_image_url'] ?? ""
             ]);
 
             Auth::login($user, true);
@@ -48,10 +64,7 @@ class AuthenticationController extends Controller
             $request->session()->put('token', JWTAuth::fromUser($user));
             $request->session()->flash('message', 'Account created successfully');
 
-            return redirect()->intended('/', [
-                'user' => $user,
-            ]);
-
+            return redirect()->intended('/');
 
         }catch (\Exception $e){
             return back()->withErrors([
