@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/csrf', function () {
+    return csrf_token();
+});
 Route::get('/', function () {
     return Inertia::render('welcome');
-})->name('home');
+})->name('welcome');
 
 Route::get('/about-us', function(){
     return Inertia::render('about-us');
@@ -24,3 +27,4 @@ Route::get('/news' , function() {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/profile/profile.php';

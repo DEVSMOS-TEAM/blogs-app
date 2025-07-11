@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\auth;
+namespace App\Http\Controllers\auth\oauth2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\OAuth2Controller;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -24,13 +26,15 @@ class GitHubController extends Controller implements OAuth2Controller
             $userModel = UserModel::OAuth2Insert($githubUser, 'github');
             $token = JWTAuth::fromUser($userModel);
 
-            return response()->json([
-                "message" => "Logged in successfully",
-                "token" => $token,
-            ]);
+            Auth::login($userModel, true);
+            session()->regenerate();
+            session()->put('token', $token);
+            session()->flash('message', 'Logged in successfully');
+
+            return redirect('/');
         }catch (\Exception $e){
             return response()->json([
-                "message" => "Unable to login using Google. Please try again.",
+                "message" => "Unable to login using Github. Please try again.",
                 "error" => $e->getMessage()
             ], 500);
         }
@@ -38,6 +42,9 @@ class GitHubController extends Controller implements OAuth2Controller
 
     public function logout()
     {
-        // TODO: Implement logout() method.
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/');
     }
 }

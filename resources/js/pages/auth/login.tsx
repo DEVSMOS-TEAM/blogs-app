@@ -1,5 +1,6 @@
 import { LoginForm } from "@/components/login-form"
 import { ArrowLeft } from 'lucide-react';
+import { AppLogo } from '@/components/AppLogo';
 
 export default function LoginPage() {
 
@@ -14,7 +15,9 @@ export default function LoginPage() {
                 <ArrowLeft/>
                 <p>Back</p>
             </div>
-            <p>CREATE ONE</p>
+            <div>
+                <AppLogo/>
+            </div>
 
         </div>
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
