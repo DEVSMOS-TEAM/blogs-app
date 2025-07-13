@@ -14,7 +14,7 @@ export default function AboutUs() {
                 <section className="relative py-20 px-4 md:px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                            About <span className="text-primary">BlogCraft</span>
+                            About <span className="text-primary">Kumnet Khnhom</span>
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                             A modern blogging platform built with passion, designed to empower writers and connect communities through
@@ -23,7 +23,7 @@ export default function AboutUs() {
                         <div className="flex flex-wrap justify-center gap-4">
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                 <Calendar className="h-4 w-4" />
-                                <span>Founded in 2024</span>
+                                <span>Founded in 2025</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                 <Users className="h-4 w-4" />
