@@ -28,7 +28,7 @@ export function LoginForm({
               <div className="flex flex-col items-center text-center gap-2">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to your <span className="font-bold text-primary">Blog</span> account
+                  Login to your <span className="font-bold text-primary">Kumnet Khnhom</span> account
                 </p>
               </div>
               <div className="grid gap-3">

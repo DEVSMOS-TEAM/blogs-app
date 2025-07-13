@@ -335,7 +335,7 @@ const Footer = () => {
              ))}
          </footer>
          <div className="mt-10 text-center text-xs text-gray-500">
-             © {new Date().getFullYear()} Your Company Name. All rights reserved.
+             © {new Date().getFullYear()} Kumnet Khnhom. All rights reserved.
          </div>
      </section>
     );
